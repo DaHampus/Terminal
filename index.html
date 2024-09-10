@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HampusOS Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            user-select: none;
+        }
+
+        #loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #progress-bar {
+            width: 80%;
+            height: 30px;
+            border: 2px solid lime;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        #progress {
+            height: 100%;
+            width: 0;
+            background-color: lime;
+        }
+
+        #percentage {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 5px;
+            color: white; /* Changed to white for better visibility */
+            font-weight: bold;
+        }
+
+        #terminal {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            border: 20px solid lime;
+            padding: 20px;
+            overflow-y: scroll;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: lime;
+        }
+
+        #terminal::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        #terminal {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: lime;
+            width: 10px;
+            height: 20px;
+            margin-left: 2px;
+            animation: blink 0.8s steps(2, start) infinite;
+        }
+
+        @keyframes blink {
+            from {
+                visibility: visible;
+            }
+            to {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <p id="loading-text">Loading HampusOS Terminal...</p>
+        <div id="progress-bar">
+            <div id="progress"></div>
+            <div id="percentage">0%</div>
+        </div>
+    </div>
+
+    <div id="terminal"></div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const progressBar = document.getElementById('progress');
+        const percentageText = document.getElementById('percentage');
+        const loadingText = document.getElementById('loading-text');
+        const loadingScreen = document.getElementById('loading-screen');
+
+        const text = `
+Welcome to HampusOS Terminal
+============================
+
+Initializing Journal Entry...
+-----------------------------
+Dear reader of this terminal.
+If you stumbled upon this terminal I politely ask you to leave now!
+-----------------------------
+IF you are my EX Bosse...
+Welcome my dear friend, it wasn't meant to end like this.
+Now I'll use this terminal to address you, since I can't confess to you how much I need you back.
+If you read this...
+It didn't last between me and Raven.
+Maybe it's too late to ask for you back?
+-----------------------------
+I should've never left you, I'm sorry, I realize now what mistake it was...
+So I know I ***** up my love, if you see this.
+Let me know if you want me back, I'd love to give us two a new try...
+
+So do you think you can give this idiot you used to love, another try?
+As for me cheating on you again, I'll make sure it won't happen again!
+Vacant, I know I've been vacant, but this time I won't be.
+Everything will be better this time, so please will you come back to me?
+
+Me and you can make up for lost time, if you want, we can watch movies, maybe go talk to people in VRChat and piss them off and have fun.
+Everything will be different this time, this time I will be loyal to just you!
+--------------
+System Report:
+--------------
+[WARNING] Reality Check Failed. 
+[ERROR] Unable to disconnect. 
+[INFO] You are already home.
+
+End of Report.
+`;
+
+        const flavorTexts = [
+            "THIS WILL TAKE EXACTLY ONE MINUTE!",
+            "Please don't tap the screen!",
+            "Hope you're patient... this is going slow!",
+            "Remember dial-up? Good times!",
+            "Don't worry, you're almost there!",
+            "Good things come to those who wait.",
+            "Is it me or is this bar stuck?",
+            "Just a bit longer... probably.",
+            "You look stupid reading these flavor texts!",
+            "Hang tight! Something awesome is coming.",
+        ];
+
+        let index = 0;
+
+        function typeText() {
+            if (index < text.length) {
+                terminal.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeText, 50); // Speed of text reveal
+            } else {
+                // Blink cursor at the end after typing
+                const cursor = document.createElement('span');
+                cursor.classList.add('cursor');
+                terminal.appendChild(cursor);
+            }
+        }
+
+        function simulateLoading() {
+            let progress = 0;
+            let flavorIndex = 0;
+
+            const loadingInterval = setInterval(() => {
+                progress += 1; // 1% increase per step
+                progressBar.style.width = progress + '%';
+                percentageText.textContent = progress + '%';
+
+                if (progress % 10 === 0 && flavorIndex < flavorTexts.length) {
+                    loadingText.textContent = flavorTexts[flavorIndex];
+                    flavorIndex++;
+                }
+
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                    loadingScreen.style.display = 'none';
+                    terminal.style.display = 'block';
+                    typeText(); // Start typing the terminal text
+                }
+            }, 2000); // Each step takes 600 milliseconds, for a total of 60,000ms (1 minute)
+        }
+
+        simulateLoading();
+    </script>
+</body>
+</html>
