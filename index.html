@@ -47,7 +47,7 @@
             width: 100%;
             text-align: center;
             top: 5px;
-            color: white; /* Changed to white for better visibility */
+            color: white;
             font-weight: bold;
         }
 
@@ -126,11 +126,10 @@ Now I'll use this terminal to address you, since I can't confess to you how much
 If you read this...
 It didn't last between me and Raven.
 Maybe it's too late to ask for you back?
------------------------------
 I should've never left you, I'm sorry, I realize now what mistake it was...
 So I know I ***** up my love, if you see this.
 Let me know if you want me back, I'd love to give us two a new try...
-
+-----------------------------
 So do you think you can give this idiot you used to love, another try?
 As for me cheating on you again, I'll make sure it won't happen again!
 Vacant, I know I've been vacant, but this time I won't be.
@@ -157,8 +156,8 @@ End of Report.
             "Good things come to those who wait.",
             "Is it me or is this bar stuck?",
             "Just a bit longer... probably.",
-            "You look stupid reading these flavor texts!",
             "Hang tight! Something awesome is coming.",
+            "You look stupid reading these flavor texts!"
         ];
 
         let index = 0;
@@ -167,9 +166,8 @@ End of Report.
             if (index < text.length) {
                 terminal.innerHTML += text.charAt(index);
                 index++;
-                setTimeout(typeText, 50); // Speed of text reveal
+                setTimeout(typeText, 50);
             } else {
-                // Blink cursor at the end after typing
                 const cursor = document.createElement('span');
                 cursor.classList.add('cursor');
                 terminal.appendChild(cursor);
@@ -181,7 +179,7 @@ End of Report.
             let flavorIndex = 0;
 
             const loadingInterval = setInterval(() => {
-                progress += 1; // 1% increase per step
+                progress += 1;
                 progressBar.style.width = progress + '%';
                 percentageText.textContent = progress + '%';
 
@@ -194,9 +192,9 @@ End of Report.
                     clearInterval(loadingInterval);
                     loadingScreen.style.display = 'none';
                     terminal.style.display = 'block';
-                    typeText(); // Start typing the terminal text
+                    typeText();
                 }
-            }, 2000); // Each step takes 600 milliseconds, for a total of 60,000ms (1 minute)
+            }, 2000);
         }
 
         simulateLoading();
