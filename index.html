@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,37 +113,58 @@
         const loadingScreen = document.getElementById('loading-screen');
 
         const text = `
-Welcome to HampusOS Terminal
-============================
+Welcome to:
+.██..██...████...██...██..█████...██..██...████....████....████..
+.██..██..██..██..███.███..██..██..██..██..██......██..██..██.....
+.██████..██████..██.█.██..█████...██..██...████...██..██...████..
+.██..██..██..██..██...██..██......██..██......██..██..██......██.
+.██..██..██..██..██...██..██.......████....████....████....████..
+=================================================================
 
 Initializing Journal Entry...
 -----------------------------
 Dear reader of this terminal.
-If you stumbled upon this terminal I politely ask you to leave now!
+If you stumbled upon this terminal...
+I politely ask you to leave now!
 -----------------------------
-IF you are my EX Bosse...
-Welcome my dear friend, it wasn't meant to end like this.
-Now I'll use this terminal to address you, since I can't confess to you how much I need you back.
-If you read this...
-It didn't last between me and Raven.
-Maybe it's too late to ask for you back?
-I should've never left you, I'm sorry, I realize now what mistake it was...
-So I know I ***** up my love, if you see this.
-Let me know if you want me back, I'd love to give us two a new try...
------------------------------
-So do you think you can give this idiot you used to love, another try?
-As for me cheating on you again, I'll make sure it won't happen again!
-Vacant, I know I've been vacant, but this time I won't be.
-Everything will be better this time, so please will you come back to me?
-
-Me and you can make up for lost time, if you want, we can watch movies, maybe go talk to people in VRChat and piss them off and have fun.
-Everything will be different this time, this time I will be loyal to just you!
+If you are one of my ex's!
+Okay this has to be said to clear things up!
+Basically I know I sh*t on all of my ex's and how terrible they are. 
+But truly they are not, sure maybe we didn't work out in the end...
+But that doesn't mean that they are terrible people. 
+And I want them to know that I never hate them. 
+I might act like I do and say that I do but I know that my heart feels different. 
+They have giving me a lot of experience.
+They have all shaped me to the person I am. 
+And without them I wouldn't be the person I am today. 
+And to all of those ex's I have hurt.
+I am truly sorry, not that I just hurt you, I'm sorry it didn't work out between us. 
+I just want to let you guys know that mostly the problem was me.
+But if you still want to hate me forever I can understand. 
+But at least I want to let you know, I know I'm a dickhead.
+So from me to you I just want to say: 
+I'm so sorry I've hurt you guys.
+Sorry for any pain I've brought you.
+-----------------------
+EXTENDED WORDS FROM ME!
+[2025 March 29th] (Saturday)
+-----------------------
+I never tought I'd end like this...
+I'd like to at least be friends with most of you.
+Though I understand not all of you can forgive me.
+Some moved on, never wanting to see me again.
+Some of you became a worse mess when we went apart.
+Some of you bloomed due to our partings.
+Do I miss my exs?
+Yes, of course I do, they gave me so many good memories.
+I have 99.9% of all memories we made in VRChat still intact.
+[𝗨𝗡𝗗𝗘𝗥 𝗖𝗢𝗡𝗦𝗧𝗥𝗨𝗖𝗧𝗜𝗢𝗡!]
 --------------
 System Report:
 --------------
-[WARNING] Reality Check Failed. 
-[ERROR] Unable to disconnect. 
-[INFO] You are already home.
+[WARNING] Reality Check Failed! 
+[ERROR] Friendship.exe couldn't be found! 
+[SHUTDWON REASON] LIFE.exe IS CORRUPTED!
 
 End of Report.
 `;
@@ -166,7 +188,7 @@ End of Report.
             if (index < text.length) {
                 terminal.innerHTML += text.charAt(index);
                 index++;
-                setTimeout(typeText, 50);
+                setTimeout(typeText, 20);
             } else {
                 const cursor = document.createElement('span');
                 cursor.classList.add('cursor');
@@ -194,7 +216,7 @@ End of Report.
                     terminal.style.display = 'block';
                     typeText();
                 }
-            }, 2000);
+            }, 10);
         }
 
         simulateLoading();
