@@ -1,126 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HampusOS Terminal</title>
-    <style>
-        body {
-            background-color: black;
-            color: lime;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            user-select: none;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HampusOS Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            user-select: none;
+        }
 
-        #loading-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            text-align: center;
-        }
+        #loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            text-align: center;
+        }
 
-        #progress-bar {
-            width: 80%;
-            height: 30px;
-            border: 2px solid lime;
-            margin-top: 20px;
-            position: relative;
-        }
+        #progress-bar {
+            width: 80%;
+            height: 30px;
+            border: 2px solid lime;
+            margin-top: 20px;
+            position: relative;
+        }
 
-        #progress {
-            height: 100%;
-            width: 0;
-            background-color: lime;
-        }
+        #progress {
+            height: 100%;
+            width: 0;
+            background-color: lime;
+        }
 
-        #percentage {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            top: 5px;
-            color: white;
-            font-weight: bold;
-        }
+        #percentage {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 5px;
+            color: white;
+            font-weight: bold;
+        }
 
-        #terminal {
-            display: none;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            border: 20px solid lime;
-            padding: 20px;
-            overflow-y: scroll;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            color: lime;
-        }
+        #terminal {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            border: 20px solid lime;
+            padding: 20px;
+            overflow-y: scroll;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: lime;
+        }
 
-        #terminal::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-        }
+        #terminal::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
 
-        #terminal {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        #terminal {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
-        .cursor {
-            display: inline-block;
-            background-color: lime;
-            width: 10px;
-            height: 20px;
-            margin-left: 2px;
-            animation: blink 0.8s steps(2, start) infinite;
-        }
+        .cursor {
+            display: inline-block;
+            background-color: lime;
+            width: 10px;
+            height: 20px;
+            margin-left: 2px;
+            animation: blink 0.8s steps(2, start) infinite;
+        }
 
-        @keyframes blink {
-            from {
-                visibility: visible;
-            }
-            to {
-                visibility: hidden;
-            }
-        }
-    </style>
+        @keyframes blink {
+            from {
+                visibility: visible;
+            }
+            to {
+                visibility: hidden;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <p id="loading-text">Loading HampusOS Terminal...</p>
-        <div id="progress-bar">
-            <div id="progress"></div>
-            <div id="percentage">0%</div>
-        </div>
-    </div>
+    <div id="loading-screen">
+        <p id="loading-text">Loading HampusOS Terminal...</p>
+        <div id="progress-bar">
+            <div id="progress"></div>
+            <div id="percentage">0%</div>
+        </div>
+    </div>
 
-    <div id="terminal"></div>
+    <div id="terminal"></div>
 
-    <script>
-        const terminal = document.getElementById('terminal');
-        const progressBar = document.getElementById('progress');
-        const percentageText = document.getElementById('percentage');
-        const loadingText = document.getElementById('loading-text');
-        const loadingScreen = document.getElementById('loading-screen');
+    <script>
+        const terminal = document.getElementById('terminal');
+        const progressBar = document.getElementById('progress');
+        const percentageText = document.getElementById('percentage');
+        const loadingText = document.getElementById('loading-text');
+        const loadingScreen = document.getElementById('loading-screen');
 
-        const text = `
+        const text = `
 Welcome to:
-oooooooooo.   oooooooooo.     .oooooo.    .oooooo..o 
-`888'   `Y8b  `888'   `Y8b   d8P'  `Y8b  d8P'    `Y8 
- 888     888   888      888 888      888 Y88bo.      
- 888oooo888'   888      888 888      888  `"Y8888o.  
- 888    `88b   888      888 888      888      `"Y88b 
- 888    .88P   888     d88' `88b    d88' oo     .d8P 
-o888bood8P'   o888bood8P'    `Y8bood8P'  8""88888P'  
+oooooooooo.   oooooooooo.     .oooooo.    .oooooo..o 
+`888'   `Y8b  `888'   `Y8b   d8P'  `Y8b  d8P'    `Y8 
+ 888     888   888      888 888      888 Y88bo.      
+ 888oooo888'   888      888 888      888  \`"Y8888o.  
+ 888    \`88b   888      888 888      888      \`"Y88b 
+ 888    .88P   888     d88' \`88b    d88' oo     .d8P 
+o888bood8P'   o888bood8P'    \`Y8bood8P'  8""88888P'  
 =================================================================
 
 Initializing Journal Entry...
@@ -131,20 +130,20 @@ I politely ask you to leave now!
 -----------------------------
 If you are one of my ex's!
 Okay this has to be said to clear things up!
-Basically I know I sh*t on all of my ex's and how terrible they are. 
+Basically I know I sh*t on all of my ex's and how terrible they are. 
 But truly they are not, sure maybe we didn't work out in the end...
-But that doesn't mean that they are terrible people. 
-And I want them to know that I never hate them. 
-I might act like I do and say that I do but I know that my heart feels different. 
+But that doesn't mean that they are terrible people. 
+And I want them to know that I never hate them. 
+I might act like I do and say that I do but I know that my heart feels different. 
 They have giving me a lot of experience.
-They have all shaped me to the person I am. 
-And without them I wouldn't be the person I am today. 
+They have all shaped me to the person I am. 
+And without them I wouldn't be the person I am today. 
 And to all of those ex's I have hurt.
-I am truly sorry, not that I just hurt you, I'm sorry it didn't work out between us. 
+I am truly sorry, not that I just hurt you, I'm sorry it didn't work out between us. 
 I just want to let you guys know that mostly the problem was me.
-But if you still want to hate me forever I can understand. 
+But if you still want to hate me forever I can understand. 
 But at least I want to let you know, I know I'm a dickhead.
-So from me to you I just want to say: 
+So from me to you I just want to say: 
 I'm so sorry I've hurt you guys.
 Sorry for any pain I've brought you.
 -----------------------
@@ -164,64 +163,64 @@ I have 99.9% of all memories we made in VRChat still intact.
 --------------
 System Report:
 --------------
-[WARNING] Reality Check Failed! 
-[ERROR] Friendship.exe couldn't be found! 
+[WARNING] Reality Check Failed! 
+[ERROR] Friendship.exe couldn't be found! 
 [SHUTDWON REASON] LIFE.exe IS CORRUPTED!
 
 End of Report.
 `;
 
-        const flavorTexts = [
-            "THIS WILL TAKE EXACTLY ONE MINUTE!",
-            "Please don't tap the screen!",
-            "Hope you're patient... this is going slow!",
-            "Remember dial-up? Good times!",
-            "Don't worry, you're almost there!",
-            "Good things come to those who wait.",
-            "Is it me or is this bar stuck?",
-            "Just a bit longer... probably.",
-            "Hang tight! Something awesome is coming.",
-            "You look stupid reading these flavor texts!"
-        ];
+        const flavorTexts = [
+            "THIS WILL TAKE EXACTLY ONE MINUTE!",
+            "Please don't tap the screen!",
+            "Hope you're patient... this is going slow!",
+            "Remember dial-up? Good times!",
+            "Don't worry, you're almost there!",
+            "Good things come to those who wait.",
+            "Is it me or is this bar stuck?",
+            "Just a bit longer... probably.",
+            "Hang tight! Something awesome is coming.",
+            "You look stupid reading these flavor texts!"
+        ];
 
-        let index = 0;
+        let index = 0;
 
-        function typeText() {
-            if (index < text.length) {
-                terminal.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeText, 20);
-            } else {
-                const cursor = document.createElement('span');
-                cursor.classList.add('cursor');
-                terminal.appendChild(cursor);
-            }
-        }
+        function typeText() {
+            if (index < text.length) {
+                terminal.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeText, 20);
+            } else {
+                const cursor = document.createElement('span');
+                cursor.classList.add('cursor');
+                terminal.appendChild(cursor);
+            }
+        }
 
-        function simulateLoading() {
-            let progress = 0;
-            let flavorIndex = 0;
+        function simulateLoading() {
+            let progress = 0;
+            let flavorIndex = 0;
 
-            const loadingInterval = setInterval(() => {
-                progress += 1;
-                progressBar.style.width = progress + '%';
-                percentageText.textContent = progress + '%';
+            const loadingInterval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + '%';
+                percentageText.textContent = progress + '%';
 
-                if (progress % 10 === 0 && flavorIndex < flavorTexts.length) {
-                    loadingText.textContent = flavorTexts[flavorIndex];
-                    flavorIndex++;
-                }
+                if (progress % 10 === 0 && flavorIndex < flavorTexts.length) {
+                    loadingText.textContent = flavorTexts[flavorIndex];
+                    flavorIndex++;
+                }
 
-                if (progress >= 100) {
-                    clearInterval(loadingInterval);
-                    loadingScreen.style.display = 'none';
-                    terminal.style.display = 'block';
-                    typeText();
-                }
-            }, 10);
-        }
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                    loadingScreen.style.display = 'none';
+                    terminal.style.display = 'block';
+                    typeText();
+                }
+            }, 600);
+        }
 
-        simulateLoading();
-    </script>
+        simulateLoading();
+    </script>
 </body>
 </html>
