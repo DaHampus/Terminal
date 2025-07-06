@@ -12,13 +12,13 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       background-color: black;
-      color: lime;
       font-family: 'Courier New', Courier, monospace;
-      user-select: none;
+      color: lime;
       overflow: hidden;
+      user-select: none;
     }
 
     #loading-screen {
@@ -28,10 +28,11 @@
       justify-content: center;
       width: 100%;
       height: 100%;
-      text-align: center;
       position: absolute;
       top: 0;
       left: 0;
+      text-align: center;
+      background-color: black;
     }
 
     #progress-bar {
@@ -58,29 +59,31 @@
     }
 
     #terminal {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: 5px solid lime;
+      display: none; /* Initial state, fixed */
+      width: 100%;
+      height: 100%;
       padding: 20px;
       background-color: black;
       color: lime;
-      overflow: hidden;
+      border: 5px solid lime;
       white-space: pre-wrap;
-      word-wrap: break-word;
-      display: flex;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
       flex-direction: column;
-      justify-content: start;
+    }
+
+    #output {
+      flex-grow: 1;
+      overflow-y: auto;
     }
 
     .cursor {
       display: inline-block;
-      background-color: lime;
       width: 10px;
       height: 20px;
+      background-color: lime;
       margin-left: 2px;
       animation: blink 0.8s steps(2, start) infinite;
     }
@@ -100,10 +103,13 @@
     </div>
   </div>
 
-  <div id="terminal"></div>
+  <div id="terminal">
+    <div id="output"></div>
+  </div>
 
   <script>
     const terminal = document.getElementById('terminal');
+    const output = document.getElementById('output');
     const progressBar = document.getElementById('progress');
     const percentageText = document.getElementById('percentage');
     const loadingText = document.getElementById('loading-text');
@@ -124,7 +130,38 @@ Initializing Journal Entry...
 Dear reader of this terminal.
 If you stumbled upon this terminal...
 I politely ask you to leave now!
-...
+-----------------------------
+If you are one of my ex's!
+Okay this has to be said to clear things up!
+Basically I know I sh*t on all of my ex's and how terrible they are. 
+But truly they are not, sure maybe we didn't work out in the end...
+But that doesn't mean that they are terrible people. 
+And I want them to know that I never hate them. 
+I might act like I do and say that I do but I know that my heart feels different. 
+They have giving me a lot of experience.
+They have all shaped me to the person I am. 
+And without them I wouldn't be the person I am today. 
+And to all of those ex's I have hurt.
+I am truly sorry, not that I just hurt you, I'm sorry it didn't work out between us. 
+I just want to let you guys know that mostly the problem was me.
+But if you still want to hate me forever I can understand. 
+But at least I want to let you know, I know I'm a dickhead.
+So from me to you I just want to say: 
+I'm so sorry I've hurt you guys.
+Sorry for any pain I've brought you.
+-----------------------
+EXTENDED WORDS FROM ME!
+[2025 March 29th] (Saturday)
+-----------------------
+I never tought I'd end like this...
+I'd like to at least be friends with most of you.
+Though I understand not all of you can forgive me.
+Some moved on, never wanting to see me again.
+Some of you became a worse mess when we went apart.
+Some of you bloomed due to our partings.
+Do I miss my exs?
+Yes, of course I do, they gave me so many good memories.
+I have 99.9% of all memories we made in VRChat still intact.
 [𝗨𝗡𝗗𝗘𝗥 𝗖𝗢𝗡𝗦𝗧𝗥𝗨𝗖𝗧𝗜𝗢𝗡!]
 --------------
 System Report:
@@ -153,13 +190,13 @@ End of Report.
 
     function typeText() {
       if (index < text.length) {
-        terminal.innerHTML += text.charAt(index);
+        output.textContent += text.charAt(index);
         index++;
         setTimeout(typeText, 20);
       } else {
         const cursor = document.createElement('span');
         cursor.classList.add('cursor');
-        terminal.appendChild(cursor);
+        output.appendChild(cursor);
       }
     }
 
@@ -180,10 +217,10 @@ End of Report.
         if (progress >= 100) {
           clearInterval(loadingInterval);
           loadingScreen.style.display = 'none';
-          terminal.style.display = 'flex';
+          terminal.style.display = 'flex'; // Moved from CSS, works now
           typeText();
         }
-      }, 600);
+      }, 1000); // 3 seconds total
     }
 
     simulateLoading();
