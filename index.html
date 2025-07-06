@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HampusOS Terminal</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       background-color: black;
       color: lime;
       font-family: 'Courier New', Courier, monospace;
-      margin: 0;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       user-select: none;
+      overflow: hidden;
     }
 
     #loading-screen {
@@ -56,28 +59,21 @@
 
     #terminal {
       display: none;
-      width: 90%;
-      height: 90%;
-      border: 5px solid lime;
-      padding: 20px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      background-color: black;
-      color: lime;
       position: absolute;
       top: 0;
       left: 0;
-    }
-
-    #terminal::-webkit-scrollbar {
-      width: 0px;
-      background: transparent;
-    }
-
-    #terminal {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      width: 100vw;
+      height: 100vh;
+      border: 5px solid lime;
+      padding: 20px;
+      background-color: black;
+      color: lime;
+      overflow: hidden;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
     }
 
     .cursor {
@@ -113,8 +109,7 @@
     const loadingText = document.getElementById('loading-text');
     const loadingScreen = document.getElementById('loading-screen');
 
-    const text = `
-Welcome to:
+    const text = `Welcome to:
 oooooooooo.   oooooooooo.     .oooooo.    .oooooo..o 
 \`888'   \`Y8b  \`888'   \`Y8b   d8P'  \`Y8b  d8P'    \`Y8 
  888     888   888      888 888      888 Y88bo.      
@@ -129,38 +124,7 @@ Initializing Journal Entry...
 Dear reader of this terminal.
 If you stumbled upon this terminal...
 I politely ask you to leave now!
------------------------------
-If you are one of my ex's!
-Okay this has to be said to clear things up!
-Basically I know I sh*t on all of my ex's and how terrible they are. 
-But truly they are not, sure maybe we didn't work out in the end...
-But that doesn't mean that they are terrible people. 
-And I want them to know that I never hate them. 
-I might act like I do and say that I do but I know that my heart feels different. 
-They have giving me a lot of experience.
-They have all shaped me to the person I am. 
-And without them I wouldn't be the person I am today. 
-And to all of those ex's I have hurt.
-I am truly sorry, not that I just hurt you, I'm sorry it didn't work out between us. 
-I just want to let you guys know that mostly the problem was me.
-But if you still want to hate me forever I can understand. 
-But at least I want to let you know, I know I'm a dickhead.
-So from me to you I just want to say: 
-I'm so sorry I've hurt you guys.
-Sorry for any pain I've brought you.
------------------------
-EXTENDED WORDS FROM ME!
-[2025 March 29th] (Saturday)
------------------------
-I never tought I'd end like this...
-I'd like to at least be friends with most of you.
-Though I understand not all of you can forgive me.
-Some moved on, never wanting to see me again.
-Some of you became a worse mess when we went apart.
-Some of you bloomed due to our partings.
-Do I miss my exs?
-Yes, of course I do, they gave me so many good memories.
-I have 99.9% of all memories we made in VRChat still intact.
+...
 [𝗨𝗡𝗗𝗘𝗥 𝗖𝗢𝗡𝗦𝗧𝗥𝗨𝗖𝗧𝗜𝗢𝗡!]
 --------------
 System Report:
@@ -216,10 +180,10 @@ End of Report.
         if (progress >= 100) {
           clearInterval(loadingInterval);
           loadingScreen.style.display = 'none';
-          terminal.style.display = 'block';
+          terminal.style.display = 'flex';
           typeText();
         }
-      }, 600); // Total duration = 600ms * 100 = 1 minute
+      }, 600);
     }
 
     simulateLoading();
